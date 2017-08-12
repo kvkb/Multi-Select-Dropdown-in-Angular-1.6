@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+$blue-color:#4078C0;
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: none;
+}
+
+html,body{
+    padding: 0;
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    //font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #fff;
+
+    &.container{
+        width:90%;
+        margin: 0 auto;
+    }
+}
+
+ul{
+    &.list-inline{
+        li{
+            display: inline-block;
+            margin: 0 5px;
+        }
+    }
+}
+
+header{
+    padding: 1em;
+    background-color: #eee;
+}
+
+
+//------------ FOR TEXT BOX & SELECT
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.hidden{
+    display: none !important;
+}
+
+.page-title{
+    margin: 0;
+    text-transform: capitalize;
+}
+
+.glyphicon{
+    color:$blue-color;
+}
+
+.section-title{
+    color:$blue-color;
+    font:{
+        size:1.4em;
+    }
+}
+blockquote{
+    border-color: $blue-color;
+    background-color: #fafafa;
+}
+.caution{
+    *{
+        color:#9F0000;
+    }    
+}
+.row{
+    margin:0;
+}
+
+.col{
+    padding: 0;
+}
+.list-inline{
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    padding: 1em;
+    border: 1px solid #ddd;
+    border-width: 0 1px;
+    height: 100%;
+}
+
+
+
+.multi-select-dropdown{
+    margin: 1em 1em 0;
+    .msd{
+        position: relative;
+        .msd-list{
+            .msd-options{
+                .msd-action{
+                    ul{
+                        margin:0;
+                        li{
+                            padding: 0;
+                            a{
+                                display: block;
+                                padding: 1em;
+                                color: #337ab7;
+                                text-decoration: underline;
+
+                            }
+                        }
+                    }
+                }
+                .msdl-filter-wrap{
+                    width: 90%;
+                    margin:5px auto;
+                }
+            }
+            position: absolute;
+            top:40px;
+            width:100%;
+            height:auto;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            z-index:2;
+            ul{
+                list-style-type: none;
+                max-height: 150px;
+                overflow-y: auto;
+                margin:0 0 1em;
+                padding:0;
+                li{
+                    cursor: pointer;
+                    padding: 0.5em 1em 0;
+                    &:last-child{
+                        padding-bottom: 1em;
+                    }
+                }
+            }
+        }
+    }  //---- msd --------
+    .msd-selections{
+        width:100%;
+        margin: 1em 0;
+        .msds-section{
+            margin: 1em 0;
+            .rule-header{
+                background-color: #eee;
+                margin: 0 0 1em;
+                .list-inline{
+                    li{
+                        width:49.8%;
+                        padding: 0.5em 1em;
+                        margin: 0;
+                        .msds-section-title{
+
+                        }
+                        .delete-row{
+                            cursor: pointer;
+                            display: inline-block;
+                        }
+                    }
+                }
+            }
+            .row{
+                .pull-left{
+                    width:24%;
+                    float: left;
+                    &:nth-child(2n){
+                        padding:0 1%;
+                    }
+                    &:last-child{
+                        width:3%;
+                        text-align: center;
+
+                    }
+                }
+
+            }
+        }
+    }
+}  //----- .multi-select-dropdown ----

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html ng-app="MSA">
+    <head>
+        <meta charset="utf-8">
+        <title>MultiSelect-Append-WithDependency</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" href="css/app.css" />
+    </head>
+    <body ng-controller="MainController">
+        <header>
+            <h2 class="page-title"><i class="glyphicon glyphicon-list-alt"></i> Multi Select Dropdown <i class="glyphicon glyphicon-option-horizontal"></i></h2>
+        </header>
+        <div class="container">
+            <section class="introduction">
+                <blockquote cite="">
+                    <p>AngularJS module with Multi-Select functionality. </p>
+                </blockquote>
+                <p class="caution">
+                    <i class="glyphicon glyphicon-exclamation-sign"></i>
+                    <span>Still in progress, the final features aren't finished.</span>
+                </p>
+            </section>
+            <section class="features">
+                <h3 class="section-title">Features</h3>
+                <ul>
+                    <li>Multiple Selections</li>
+                    <li>Append Dynamic Elements On Selection (Optional)</li>
+                    <li>Shows the selected index</li>
+                </ul>
+            </section>
+            <section class="dependencies">
+                <h3 class="section-title">Dependencies</h3>
+                <ul>
+                    <li>AngularJS 1.6.4</li>
+                    <li>JQuery 3.2.1</li>
+                    <li>Bootstrap 3.3.7 (for styling &amp; icons)</li>
+                </ul>
+            </section>
+            <div class="multi-select-dropdown">
+            <div class="row msd">
+                <div class="col-md-3 col">
+                    <input type="text" class="form-control msd-trigger" name="selectRegionCount" value="Selected:{{(RegionList | filter : {model:true}).length}}" />
+                    <div class="msd-list hidden">
+                        <div class="msd-options">
+                            <div class="msd-action">
+                                <ul class="list-inline">
+                                    <li>
+                                        <a href="javascript:void(0);" ng-click="SelectAllOptions(RegionList)">Select All</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" ng-click="UnSelectAllOptions(RegionList)">UnSelect All</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="msdl-filter-wrap">
+                                <input type="text" name="msdFilter4" class="msd-filter form-control" ng-model="msdFilter4" value="" />
+                            </div>  <!-- msdl-filter-wrap -->
+                        </div>  <!-- msd-options -->
+                        <ul class="msd-ul">
+                            <li ng-repeat="item in RegionList | filter:msdFilter4" id="region-{{item.id}}" class="msd-li">
+                                <input type="checkbox" name="{{item.name}}" ng-model="item.model" ng-change="SelectOption(item)" />
+                                <span class="form-check-label">{{item.text}}</span>
+                            </li>
+                        </ul>
+                    </div>  <!-- msd-list -->
+                </div>  <!-- col-md-3 col -->
+            </div>  <!-- msd -->
+
+            <div class="msd-selections" id="">
+                <section class="msds-section" ng-if="i.model == true" ng-repeat="i in RegionList">
+                    <div class="rule-header">
+                        <ul class="list-inline">
+                            <li>
+                                <h4 class="msds-section-title">{{i.text}}</h4>
+                            </li>
+                            <li class="text-right">
+                                <span class="delete-row" ng-click="DeleteRow(i)">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="msds-section-body">
+                        <div class="row">
+                            <div class="col-md-3 col" id="pl-$index" ng-repeat="j in i.list" ng-init="">
+                                <div class="msd">
+                                    <input type="text" class="form-control msd-trigger" name="" value="Selected:{{(j | filter:{model:true}).length}}" />
+                                    <div class="msd-list hidden">
+                                        <div class="msd-options">
+                                            <div class="msd-action">
+                                                <ul class="list-inline">
+                                                    <li>
+                                                        <a href="javascript:void(0);" ng-click="SelectAllOptions(j)">Select All</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0);" ng-click="UnSelectAllOptions(j)">UnSelect All</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="msdl-filter-wrap">
+                                                <input type="text" name="msdFilterj" class="msd-filter form-control" ng-model="msdFilterj" />
+                                            </div>  <!-- msdl-filter-wrap -->
+                                        </div>  <!-- msd-options -->
+                                        <ul>
+                                            <li ng-repeat="k in j | filter:msdFilterj" ng-init="">
+                                                <input type="checkbox" name="{{k.name}}" ng-model="k.model" ng-change="ChildSelectOption(k)" />
+                                                <span>{{k.text}}</span>
+                                            </li>
+                                        </ul>
+                                    </div>  <!-- msd-list -->
+                                </div>  <!-- msd -->
+                            </div> <!-- pull-left -->
+
+                            <div class="col-md-9" ng-repeat="cities in i.list" ng-init="citems = {mall,store,brand}">
+                                <div class="row">
+                                    <div class="col-md-4 col">
+                                        <div class="msd">
+                                            <input type="text" class="form-control msd-trigger" name="" value="" />
+                                            <div class="msd-list hidden">
+                                                <div class="msd-options">
+                                                    <div class="msd-action">
+                                                        <ul class="list-inline" ng-init="">
+                                                            <li
+                                                                <a href="javascript:void(0);" ng-click="SelectAllOptions(cities[$index].malls)">Select All</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript:void(0);" ng-click="UnSelectAllOptions(cities[$index].malls)">UnSelect All</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="msdl-filter-wrap">
+                                                        <input type="text" name="msdFiltercity" class="msd-filter form-control" ng-model="msdFiltercity" />
+                                                    </div>  <!-- msdl-filter-wrap -->
+                                                </div>  <!-- msd-options -->
+                                                <ul>
+                                                    <li ng-repeat="city in cities">
+                                                        <div ng-if="city.model == true" ng-repeat="mall in city.malls | filter:msdFiltercity">
+                                                            <input type="checkbox" name="{{mall.name}}" ng-model="mall.model" ng-change="ChildSelectOption(mall)" />
+                                                            <span>{{mall.text}}</span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>  <!-- msd-list -->
+                                        </div>  <!-- msd -->
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="msd">
+                                            <input type="text" class="form-control msd-trigger" name="" value="" />
+                                            <div class="msd-list hidden">
+                                                <div class="msd-options">
+                                                    <div class="msd-action">
+                                                        <ul class="list-inline" ng-init="">
+                                                            <li>
+                                                                <a href="javascript:void(0);" ng-click="SelectAllOptions(citems.mall)">Select All</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript:void(0);" ng-click="UnSelectAllOptions(citems.mall)">UnSelect All</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="msdl-filter-wrap">
+                                                        <input type="text" name="msdFiltercity" class="msd-filter form-control" ng-model="msdFiltercity" />
+                                                    </div>  <!-- msdl-filter-wrap -->
+                                                </div>  <!-- msd-options -->
+                                                <ul>
+                                                    <li ng-repeat="city in cities">
+                                                        <div ng-if="city.model == true" ng-repeat="mall in city.malls | filter:msdFiltercity">
+                                                            <div ng-if="mall.model == true" ng-repeat="storeitem in mall.stores">
+                                                                <input type="checkbox" name="{{storeitem.name}}" ng-model="storeitem.model" ng-change="ChildSelectOption(storeitem)" />
+                                                                <span>{{storeitem.text}}</span>
+                                                            </div>
+
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>  <!-- msd-list -->
+                                        </div>  <!-- msd -->
+                                    </div>  <!-- col-md-4 -->
+                                    <div class="col-md-4 col">
+                                        <div class="msd">
+                                            <input type="text" class="form-control msd-trigger" name="" value="" />
+                                            <div class="msd-list hidden">
+                                                <div class="msd-options">
+                                                    <div class="msd-action">
+                                                        <ul class="list-inline" ng-init="">
+                                                            <li>
+                                                                <a href="javascript:void(0);" ng-click="SelectAllOptions(citems.mall)">Select All</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript:void(0);" ng-click="UnSelectAllOptions(citems.mall)">UnSelect All</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="msdl-filter-wrap">
+                                                        <input type="text" name="msdFiltercity" class="msd-filter form-control" ng-model="msdFiltercity" />
+                                                    </div>  <!-- msdl-filter-wrap -->
+                                                </div>  <!-- msd-options -->
+                                                <ul>
+                                                    <li ng-repeat="city in cities">
+                                                        <div ng-if="city.model == true" ng-repeat="mall in city.malls | filter:msdFiltercity">
+                                                            <div ng-if="mall.model == true" ng-repeat="storeitem in mall.stores">
+                                                                <div ng-if="storeitem.model == true" ng-repeat="branditem in storeitem.brands">
+                                                                    <input type="checkbox" name="{{branditem.name}}" ng-model="branditem.model" ng-change="ChildSelectOption(branditem)" />
+                                                                    <span>{{branditem.text}}</span>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>  <!-- msd-list -->
+                                        </div>  <!-- msd -->
+                                    </div>  <!-- col-md-4 -->
+
+
+
+
+
+                                </div>  <!-- row -->
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+            </div>  <!-- add-rules-by-region -->
+        </div>  <!-- multi-select-dropdown -->
+        </div>  <!-- container -->
+        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="js/angular.min.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+    </body>
+</html>
